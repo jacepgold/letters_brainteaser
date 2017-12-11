@@ -8,12 +8,12 @@ def letters_menu
   if user_input == 1 || user_input == 2
     if user_input == 1
       puts "What's Your Input?"
-      user_input = get_input
-      puts "You put #{user_input}"
-      check_input(user_input)
+      user_string = get_input
+      puts "You put #{user_string}"
+      check_input(user_string)
       letters_menu
     elsif user_input == 2
-      puts "Thanks for using this program!"
+      puts "Thanks for using my program."
       exit
     else
       puts "I'm sorry, there was some kind of issue. Please try again."
@@ -33,9 +33,43 @@ def letters_menu
   end
 end
 
-def check_input(user_input)
-  puts "Entered check input with #{user_input}"
+def check_input(user_string)
+  has_multiple = false
+  mulitple_count = 0
+  puts "Entered check input with #{user_string}"
+  input_array = user_string.split(" ")
 
+
+  for item in input_array
+    puts item
+    letters = item.downcase.gsub(/[^a-z]/, '').chars
+    binding.pry
+    if letters == letters.uniq
+      puts letters
+    end
+
+  end
+
+
+  # s = "The quick brown fox jumps over the lazy dog."
+  # .downcase
+  # ("a".."z").all?{|c| s.count(c) <= 1}
+  # # => false
+
+
+  if has_multiple
+    puts "Mulitple duplicate letters found."
+    if multiple_count == 1
+      puts "Highest repeated letters in the word: <word here>"
+      letters_menu
+    else
+      puts "Multiples Found: "
+      letters_menu
+    end
+  else 
+    puts "No multiple letters found in any words."
+    letters_menu
+  end
 end
 
 def get_input
